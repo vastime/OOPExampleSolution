@@ -1,8 +1,4 @@
-#include <iostream>
-#include <string>
-using namespace std;
-
-
+#include "main.h"
 class Student {
 public:
 	string name;
