@@ -29,6 +29,7 @@ int main() {
 	test(array, size);
 
 	cout << "After:" << convert(array, size) << endl;
+	delete[] array;
 
 	return 0;
 }
