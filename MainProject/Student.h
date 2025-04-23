@@ -1,66 +1,112 @@
-#include "main.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
 class Student {
-
-
 public:
-
+	// fields
 	string name;
 	int age;
-	double mark;
+	int* marks;
+	int countMarks;
 	bool alive;
-	// default-constructor or constructor without arguments
-	Student() {
-		cout << "Default-constructor..." << endl;
-		name = "no name";
-		age = 13;
-		mark = 4.0;
-		alive = true;
+
+	// constructors
+
+	// default-constructors or constructors without arguments
+	Student() : Student("no name", 13, 0, true) {
+		cout << "default-constructor..." << endl;
 	}
-	//  constructor with arguments
-	Student(string nm) {
-		cout << "constructor with arguments" << endl;
-		name = nm;
-		age = 13;
-		mark = 4.0;
-		alive = true;
-	}
+
 	// constructor with arguments
-	Student(string nm, int a) {
-		cout << "constructor with arguments..." << endl;
-		name = nm;
-		age = a;
-		mark = 4.0;
-		alive = true;
+	Student(string name) : Student(name, 13) {
+		cout << "constructor with arguments (name)..." << endl;
 	}
-	//canonical-constructor
-	Student(string nm, int a, double m, bool al) {
-		cout << "canonical-constructor" << endl;
-		name = nm;
-		age = a;
-		mark = m;
-		alive = al;
+
+	// constructor with arguments
+	Student(string name, int age) : Student(name, age, 0, true) {
+		cout << "constructor with arguments (name, age)..." << endl;
 	}
+
+	// canonical-constructor
+	Student(string name, int age, int countMark, bool alive) {
+		cout << "canonical-constructor ..." << endl;
+		this->name = name;
+		this->age = age;
+		this->countMarks = countMark;
+		marks = new int[countMark];
+
+		for (int i = 0; i < countMark; i++)
+		{
+			marks[i] = 4;
+		}
+
+		this->alive = alive;
+	}
+
+	// copy-constructor
+	Student(const Student& student) : Student(student.name,
+		student.age, student.countMarks, student.alive)
+	{
+		cout << "copy-constructor ..." << endl;
+
+		for (int i = 0; i < countMarks; i++)
+		{
+			marks[i] = student.marks[i];
+		}
+	}
+
 	// destructor
 	~Student() {
 		cout << "destructor..." << endl;
-	   }
-	//copy-constructor
-	Student( const Student& student) {
-		cout << "copy-constructor" << endl;
-		name = student.name;
-		age = student.age;
-		mark = student.mark;
-		alive = student.alive;
+
+		if (countMarks > 0) {
+			delete[] this->marks;
+		}
 	}
 
-
+	// methods
 	string toString() {
-		string s = "Name: " + name;
-		s += ", age: " + to_string(age);
-		s += ", mark: " + to_string(mark);
+		string s = "Name: " + this->name;
+		s += ", age: " + to_string(this->age);
+		s += ", marks " + this->convert();
 		s += ", alive: ";
-		s += (alive ? "Yes" : "No");
+		s += this->alive ? "yes" : "no";
 		return s;
+	}
 
+	string convert() {
+		string s = "[";
+
+		if (this->countMarks > 0) {
+			for (int i = 0; i < this->countMarks - 1; i++)
+			{
+				s += to_string(this->marks[i]) + ", ";
+			}
+
+			s += to_string(this->marks[this->countMarks - 1]);
+		}
+
+		s += "]";
+
+		return s;
+	}
+
+	int getMark(int index) {
+		if (countMarks == 0 || index < 0
+			|| index >= countMarks) {
+			return -1;
+		}
+
+		return marks[index];
+	}
+
+	void setMark(int index, int mark) {
+		if (countMarks == 0 || index < 0 || index >= countMarks
+			|| mark < 0 || mark > 10) {
+			return;
+		}
+
+		marks[index] = mark;
 	}
 };
