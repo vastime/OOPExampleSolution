@@ -29,6 +29,7 @@ public:
 	void setAlive(bool alive);
 	int getMark(int index);
 	void setMark(int index, int mark);
+	double getAverageMark();
 
 	string toString();
 };

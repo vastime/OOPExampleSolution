@@ -75,3 +75,13 @@ string Student::toString() {
 	s += (this->alive ? "yes" : "no");
 	return s;
 }
+
+double Student::getAverageMark() {
+	double sum = 0;
+	for (int i = 0; i < countMark; i++)
+	{
+		sum += marks[i];
+
+	}
+	return sum / countMark;
+}
