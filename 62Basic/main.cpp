@@ -6,11 +6,12 @@ using namespace std;
 // div -- divide
 int main()
 {
+
 	Integer a;
 
-	Integer b(3);
+	Integer b(1321312);
 
-	a.setNumber(15);
+	a.setNumber(5555);
 
 	Integer add = a.add(b);
 
@@ -27,6 +28,7 @@ cout << "Number b = " << b.getNumber() << endl;
 cout << "----------------------" << endl;
 cout << "add: " << a.getNumber() << "+" << b.getNumber() 
 << " = " << add.getNumber() << endl;
+
 cout << "----------------------" << endl;
 cout << "substract: " << a.getNumber() << "-" << b.getNumber()
 << " = " << sub.getNumber() << endl;

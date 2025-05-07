@@ -19,7 +19,6 @@ Integer Integer::add(Integer in)
 }
 
 
-
 Integer Integer::sub(Integer in)
 {
 	Integer num;
